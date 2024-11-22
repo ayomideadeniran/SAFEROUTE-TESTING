@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4A90E2;
+      margin-top: 20px;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      color: #333;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    select {
+      background-color: #fff;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #357ABD;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      form {
+        padding: 15px;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Driver Registration</h1>
+  <form action="/submit-register" method="POST">
+    <label for="fullName">Full Name:</label>
+    <input type="text" name="fullName" id="fullName" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" name="phone" id="phone" required>
+
+    <label for="vehicleType">Vehicle Type:</label>
+    <input type="text" name="vehicleType" id="vehicleType" required>
+
+    <label for="vehicleReg">Vehicle Registration:</label>
+    <input type="text" name="vehicleReg" id="vehicleReg" required>
+
+    <label for="licenseNumber">License Number:</label>
+    <input type="text" name="licenseNumber" id="licenseNumber" required>
+
+    <label for="operatingArea">Select Operating Route:</label>
+    <select name="operatingArea" id="operatingArea" required>
+      <option value="" disabled selected>Choose a route</option>
+      <% suggestedRoutes.forEach((route) => { %>
+        <option value="<%= route %>"><%= route %></option>
+      <% }); %>
+    </select>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" name="confirmPassword" id="confirmPassword" required>
+
+    <label>
+      <input type="checkbox" name="subscribeAlerts"> Subscribe to alerts
+    </label>
+
+    <label>
+      <input type="checkbox" name="termsOfService" required> I agree to the Terms of Service
+    </label>
+
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>

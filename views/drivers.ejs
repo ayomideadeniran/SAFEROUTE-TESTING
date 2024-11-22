@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drivers List</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4A90E2;
+      margin: 20px 0;
+    }
+
+    /* Table Container */
+    .table-container {
+      width: 90%;
+      margin: 0 auto 20px auto;
+      overflow-x: auto; /* Allow horizontal scrolling on small screens */
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4A90E2;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Message for No Data */
+    .no-data {
+      text-align: center;
+      color: #777;
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      table {
+        border: 0;
+      }
+
+      th, td {
+        display: block;
+        text-align: left;
+        padding: 8px;
+        border: none;
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      th {
+        background-color: transparent;
+        color: #4A90E2;
+        font-weight: bold;
+      }
+
+      td {
+        padding: 6px;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: bold;
+        color: #4A90E2;
+        text-transform: uppercase;
+      }
+
+      th, td::before {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Registered Drivers</h1>
+
+  <% if (drivers && drivers.length > 0) { %>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle Registration</th>
+            <th>License Number</th>
+            <th>Operating Route</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% drivers.forEach(driver => { %>
+            <tr>
+              <td data-label="Full Name"><%= driver.fullName %></td>
+              <td data-label="Phone"><%= driver.phone %></td>
+              <td data-label="Vehicle Type"><%= driver.vehicleType %></td>
+              <td data-label="Vehicle Registration"><%= driver.vehicleReg %></td>
+              <td data-label="License Number"><%= driver.licenseNumber %></td>
+              <td data-label="Operating Route"><%= driver.operatingArea %></td>
+              <td data-label="Email"><%= driver.email %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <p class="no-data">No drivers registered yet.</p>
+  <% } %>
+</body>
+</html>

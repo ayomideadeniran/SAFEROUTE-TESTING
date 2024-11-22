@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send SMS to Drivers</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4A90E2;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select,
+        textarea,
+        button {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        select,
+        textarea {
+            resize: vertical;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        /* Message Display Styles */
+        .success {
+            color: green;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            label,
+            select,
+            textarea,
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Send SMS to Drivers</h1>
+
+        <!-- Form to select route and send SMS -->
+        <form method="POST" action="/send-sms">
+            <!-- Route Selection -->
+            <label for="route">Select Route:</label>
+            <select name="route" id="route" required>
+                <option value="" disabled selected>Choose a route</option>
+                <% if (routes && routes.length > 0) { %>
+                    <% routes.forEach((route) => { %>
+                        <option value="<%= route %>"><%= route %></option>
+                    <% }); %>
+                <% } else { %>
+                    <option disabled>No routes available</option>
+                <% } %>
+            </select><br><br>
+
+            <!-- Message Input -->
+            <label for="message">Message:</label>
+            <textarea name="message" id="message" required></textarea><br><br>
+
+            <!-- Submit Button -->
+            <button type="submit">Send SMS</button>
+        </form>
+
+        <!-- Display Success or Error Messages -->
+        <% if (message) { %>
+            <p class="success"><%= message %></p>
+        <% } %>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+    </div>
+
+</body>
+
+</html>
